@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/econolabs/apexchart/static/css/main.2cce8147.chunk.css",
-    "main.js": "/econolabs/apexchart/static/js/main.f8d9b84b.chunk.js",
-    "main.js.map": "/econolabs/apexchart/static/js/main.f8d9b84b.chunk.js.map",
-    "runtime~main.js": "/econolabs/apexchart/static/js/runtime~main.99dce330.js",
-    "runtime~main.js.map": "/econolabs/apexchart/static/js/runtime~main.99dce330.js.map",
-    "static/js/2.69010994.chunk.js": "/econolabs/apexchart/static/js/2.69010994.chunk.js",
-    "static/js/2.69010994.chunk.js.map": "/econolabs/apexchart/static/js/2.69010994.chunk.js.map",
-    "index.html": "/econolabs/apexchart/index.html",
-    "precache-manifest.9ce8e352abd4903c3a821dc73917eb6c.js": "/econolabs/apexchart/precache-manifest.9ce8e352abd4903c3a821dc73917eb6c.js",
-    "service-worker.js": "/econolabs/apexchart/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/econolabs/apexchart/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/econolabs/apexchart/static/media/logo.5d5d9eef.svg"
+    "main.css": "/apexchart/static/css/main.2cce8147.chunk.css",
+    "main.js": "/apexchart/static/js/main.d2cc92b9.chunk.js",
+    "main.js.map": "/apexchart/static/js/main.d2cc92b9.chunk.js.map",
+    "runtime~main.js": "/apexchart/static/js/runtime~main.7cdf4ea3.js",
+    "runtime~main.js.map": "/apexchart/static/js/runtime~main.7cdf4ea3.js.map",
+    "static/js/2.69010994.chunk.js": "/apexchart/static/js/2.69010994.chunk.js",
+    "static/js/2.69010994.chunk.js.map": "/apexchart/static/js/2.69010994.chunk.js.map",
+    "index.html": "/apexchart/index.html",
+    "precache-manifest.04e9f857d694b5d883e67b5e71be5164.js": "/apexchart/precache-manifest.04e9f857d694b5d883e67b5e71be5164.js",
+    "service-worker.js": "/apexchart/service-worker.js",
+    "static/css/main.2cce8147.chunk.css.map": "/apexchart/static/css/main.2cce8147.chunk.css.map",
+    "static/media/logo.svg": "/apexchart/static/media/logo.5d5d9eef.svg"
   }
 }
