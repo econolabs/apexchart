@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/apexchart/static/js/main.6602b438.chunk.js",
-    "main.js.map": "/apexchart/static/js/main.6602b438.chunk.js.map",
-    "runtime~main.js": "/apexchart/static/js/runtime~main.54d5fda3.js",
-    "runtime~main.js.map": "/apexchart/static/js/runtime~main.54d5fda3.js.map",
-    "static/js/2.18f758be.chunk.js": "/apexchart/static/js/2.18f758be.chunk.js",
-    "static/js/2.18f758be.chunk.js.map": "/apexchart/static/js/2.18f758be.chunk.js.map",
+    "main.js": "/apexchart/static/js/main.ed8012f9.chunk.js",
+    "main.js.map": "/apexchart/static/js/main.ed8012f9.chunk.js.map",
+    "runtime~main.js": "/apexchart/static/js/runtime~main.7cdf4ea3.js",
+    "runtime~main.js.map": "/apexchart/static/js/runtime~main.7cdf4ea3.js.map",
+    "static/js/2.359db1dc.chunk.js": "/apexchart/static/js/2.359db1dc.chunk.js",
+    "static/js/2.359db1dc.chunk.js.map": "/apexchart/static/js/2.359db1dc.chunk.js.map",
     "index.html": "/apexchart/index.html",
-    "precache-manifest.6f22951b9e3f0a396ef4c952b2a73533.js": "/apexchart/precache-manifest.6f22951b9e3f0a396ef4c952b2a73533.js",
+    "precache-manifest.3ed42d0f7a501a0e079108a84a12c35e.js": "/apexchart/precache-manifest.3ed42d0f7a501a0e079108a84a12c35e.js",
     "service-worker.js": "/apexchart/service-worker.js"
   }
 }
