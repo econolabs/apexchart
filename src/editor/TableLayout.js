@@ -15,36 +15,69 @@ class TableLayout extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE, selected: null };
+    this.state = { ...INITIAL_STATE, selected: null, value: " " };
     this.handleClick = this.handleClick.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick(id) {
+  handleClick(id,value) {
     this.setState(state => ({
-      selected: id
+      selected: id,
+      value: value
     }));
+  }
+
+  handleKeyPress = event => {
+    if (event.key === "Enter") {
+      this.props.handleSeriesDataChange(
+        0,
+        this.state.selected,
+        this.state.value
+      );
+      this.setState({selected: 100});
+      console.log("enter press here! ");
+    }
+  };
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   render() {
     const { inputs, selected } = this.state;
     //  const { series } = this.props.series;
-    console.log(this.props.series[0].data);
-    console.log(this.props.xaxis.categories);
+   // console.log(this.props.series[0].data);
+   // console.log(this.props.xaxis.categories);
     const categories = this.props.xaxis.categories;
     const dataline = this.props.series[0].data
       ? this.props.series[0].data
       : [1, 2, 3, 4];
     return (
       <div>
-        Edit Data Line
+        Edit {this.props.typeofchart}
         <h3>{this.props.series[0].name}</h3>
         {dataline.map((item, index) => (
-          <div key={index} className="HorizontalFlexSpaceBetween" style={{padding: '10px'}}>
+          <div
+            key={index}
+            className="HorizontalFlexSpaceBetween"
+            style={{ padding: "10px" }}
+          >
             <div style={{ marginRight: "2rem" }}>{categories[index]}</div>
-            <div onClick={() => this.handleClick(index)}>{item}</div>
+            {index === selected ? (
+              <input
+                type="text"
+                value={this.state.value}
+                onKeyPress={this.handleKeyPress}
+                onChange={this.handleChange}
+                style={{maxWidth: '5rem'}}
+              />
+            ) : (
+              <div onClick={() => this.handleClick(index, item)}>{item}</div>
+            )}
           </div>
         ))}
-        {inputs.length > 1 &&
+        {/* {inputs.length > 1 &&
           inputs.map((item, index) => (
             <div key={item.firebasecode}>
               {item.id === selected ? (
@@ -58,7 +91,7 @@ class TableLayout extends Component {
                 <p onClick={() => this.handleClick(item.id)}>{item.value}</p>
               )}
             </div>
-          ))}
+          ))} */}
       </div>
     );
   }

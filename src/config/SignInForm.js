@@ -28,8 +28,8 @@ class MyForm extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then((res) => {
         this.setState({ ...INITIAL_STATE, user: res.user.email });
-        console.log('Signed in!!!');
-        console.log(res);
+     //   console.log('Signed in!!!');
+     //   console.log(res);
         this.props.onLogin(res.user.providerData); 
       })
       .catch(error => {

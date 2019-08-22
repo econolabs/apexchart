@@ -5,7 +5,6 @@ import { HashRouter, Route, Link } from "react-router-dom";
 
 import SignUpForm from "./config/SignUpForm";
 import SignInForm from "./config/SignInForm";
-import SignOutButton from "./config/SignOutButton";
 import AllUsers from "./config/AllUsers";
 
 import UserData from "./editor/UserData";
@@ -124,25 +123,16 @@ class AppWithAuth extends React.Component {
       <div>
         {useruid ? (
           <React.Fragment>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between"
-              }}
-            >
-              <p>Econolabs</p>
-              <p>{this.state.username}</p>
-              <p>{this.props.typeofchart}</p>
-              <SignOutButton onLogin={this.onLogin} />
-            </div>
-
-            <hr/>
-            <ChartEditorLayout useruid={useruid}/>
-            {/* 
+            <ChartEditorLayout
+             useruid={useruid}
+             username={this.state.username}
+             typeofchart={this.props.typeofchart}
+             onLogin={this.onLogin}
+             />
+            
             <AllUsers />
             <UserData useruid={useruid} />
-            */}
+           
           </React.Fragment> 
         ) : (
 

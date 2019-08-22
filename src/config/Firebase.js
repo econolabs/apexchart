@@ -58,7 +58,7 @@ class Firebase {
 
     user = uid => this.db.ref(`databyuser/${uid}`);
 
-    databycode = code => this.db.ref(`databycode'/${code}`);
+    databycode = code => this.db.ref(`databycode/${code}`);
 
     users = () => this.db.ref('users');
 
