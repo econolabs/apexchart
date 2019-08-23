@@ -51,13 +51,29 @@ class ChartEditorLayoutWithFirebase extends React.Component {
 
       let seriename = this.state.series[0].name;
       let seriedata = [...this.state.series[0].data];
-      let newseriedata = this.state.series[0].data.map((item, index) => {
- //       let userdataitem = userdata.find(dataitem => dataitem.dimension1 === seriename && dataitem.dimension2===)
-        return item;
+      let newseriedata = this.state.series[0].data.map((oldValue, index) => {
+        let xaxisItem = this.state.xaxis.categories[index];
+        console.log(xaxisItem);
+        console.log(seriename);
+        console.log(oldValue);
+        //console.log(seriename);
+        //console.log(seriedata);
+        //console.log(userdataList);
+        let userdataitem = userdataList.filter(
+          dataitem =>
+            dataitem.dimension1 === seriename &&
+            dataitem.dimension2 === xaxisItem
+        );
+        if (userdataitem.length > 0) {
+          let newValue = parseFloat(userdataitem[0].value);
+          console.log(newValue);
+          return newValue
+        }
+        return oldValue;
       });
       console.log(newseriedata);
       this.setState({
-        userdata: userdataList,
+        userdata: newseriedata,
         isUpdating: false
       });
     });
