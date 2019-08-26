@@ -12,3 +12,10 @@
   flex-direction: row;
   align-content: space-between; 
 }
+
+.flexCenterEverything {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+ }

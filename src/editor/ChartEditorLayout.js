@@ -71,9 +71,13 @@ class ChartEditorLayoutWithFirebase extends React.Component {
         }
         return oldValue;
       });
+
+      let series = [...this.state.series];
+      series[0].data = newseriedata;
       console.log(newseriedata);
       this.setState({
         userdata: newseriedata,
+        series,
         isUpdating: false
       });
     });
@@ -136,22 +140,19 @@ class ChartEditorLayoutWithFirebase extends React.Component {
   }
 
   render() {
-    let { isUpdating } = this.state;
-    console.log(this.state.userdata);
-    //console.log(username, useruid);
+    let { isUpdating, series } = this.state;
+    console.log(series);
+
+    if (isUpdating) return (<div className="flexCenterEverything" style={{ minWidth: "900px", maxHeight: "500px" }}>...</div>)
 
     return (
       <div className="ChartEditorContainer">
         <div style={{ minWidth: "900px", maxHeight: "500px" }}>
-          {isUpdating ? (
-            <div>...</div>
-          ) : (
-            <ChartLayout
-              useruid={this.props.useruid}
-              series={this.state.series}
-              xaxis={this.state.xaxis}
-            />
-          )}
+          <ChartLayout
+            useruid={this.props.useruid}
+            series={this.state.series}
+            xaxis={this.state.xaxis}
+          />
         </div>
         <div>
           <span style={{ marginRight: "2rem" }}>{this.props.username}</span>
@@ -161,7 +162,7 @@ class ChartEditorLayoutWithFirebase extends React.Component {
           <hr />
           <TableLayout
             useruid={this.props.useruid}
-            series={this.state.series}
+            series={series}
             xaxis={this.state.xaxis}
             typeofchart={this.props.typeofchart}
             handleSeriesDataChange={this.handleSeriesDataChange}
