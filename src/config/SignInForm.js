@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FirebaseContext } from '../config/Firebase';
 
+import "../app.css";
+
 const SignInForm = (props) => (
   <FirebaseContext.Consumer>
     {firebase => <MyForm firebase={firebase} {...props}/>}
@@ -53,7 +55,8 @@ class MyForm extends Component {
         {this.state.user ?
           <p>{this.state.user}</p> :
           <form onSubmit={this.onSubmit} style={{marginBottom: '20px'}}>
-             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <div className="flexRowOrColumn">
+             {/* <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}> */}
             <input
               name="email"
               value={email}
@@ -69,7 +72,7 @@ class MyForm extends Component {
               placeholder="Password"
             />
             <button disabled={isInvalid} type="submit">
-              Sign In
+              Войти
         </button>
         </div>
             {error && <p>{error.message}</p>}

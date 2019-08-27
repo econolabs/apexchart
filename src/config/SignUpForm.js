@@ -70,7 +70,7 @@ class MyForm extends Component {
               value={username}
               onChange={this.onChange}
               type="text"
-              placeholder="Full Name"
+              placeholder="Name"
             />
           </div>
           <div className="SignUpFormInput">
@@ -79,7 +79,7 @@ class MyForm extends Component {
               value={email}
               onChange={this.onChange}
               type="text"
-              placeholder="Email Address"
+              placeholder="Email"
             />
           </div>
           <div className="SignUpFormInput">
@@ -104,7 +104,7 @@ class MyForm extends Component {
 
           <div className="SignUpFormInput">
             <button disabled={isInvalid} type="submit">
-              Sign Up
+              Зарегистрироваться
             </button>
             {error && <p>{error.message}</p>}
           </div>

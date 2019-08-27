@@ -19,3 +19,28 @@
     align-items: center;
     justify-content: center;
  }
+
+ .flexRowOrColumn {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+ }
+
+ @media screen and (min-width: 600px){
+  .flexRowOrColumn {
+   -webkit-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between; 
+  }  
+}
+
+@media screen and (max-width: 600px){
+  .flexRowOrColumn {
+    -webkit-flex-direction: column;
+    flex-direction: column;    
+  }
+  .flexRowOrColumn > input {
+    margin: 0.2rem;
+  }
+}
