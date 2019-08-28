@@ -31,7 +31,6 @@ class TableLayout extends Component {
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.props.handleSeriesDataChange(
-        0,
         this.state.selected,
         this.state.value
       );
@@ -46,18 +45,13 @@ class TableLayout extends Component {
 
   render() {
     const { inputs, selected } = this.state;
-    //  const { series } = this.props.series;
-   // console.log(this.props.series[0].data);
-   // console.log(this.props.xaxis.categories);
     const categories = this.props.xaxis.categories;
-    const dataline = this.props.series[0].data
-      ? this.props.series[0].data
+    const dataline = this.props.seriesLine.data
+      ? this.props.seriesLine.data
       : [1, 2, 3, 4];
     return (
       <div>
-        Edit {this.props.typeofchart}
-        <h3>{this.props.series[0].name}</h3>
-        {dataline.map((item, index) => (
+         {dataline.map((item, index) => (
           <div
             key={index}
             className="HorizontalFlexSpaceBetween"

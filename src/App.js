@@ -5,10 +5,10 @@ import { HashRouter, Route, Link } from "react-router-dom";
 
 import SignUpForm from "./config/SignUpForm";
 import SignInForm from "./config/SignInForm";
-import AllUsers from "./config/AllUsers";
 
-import UserData from "./editor/UserData";
-//import TableLayout from "./editor/TableLayout";
+// import AllUsers from "./config/AllUsers";
+// import UserData from "./editor/UserData";
+
 
 import ChartEditorLayout from "./editor/ChartEditorLayout";
 
@@ -130,9 +130,9 @@ class AppWithAuth extends React.Component {
              onLogin={this.onLogin}
              />
             
-            <AllUsers />
+            {/* <AllUsers />
             <UserData useruid={useruid} />
-           
+            */}
           </React.Fragment> 
         ) : (
 

@@ -22,18 +22,32 @@ class ChartEditorLayoutWithFirebase extends React.Component {
 
     this.state = {
       isUpdating: true,
-      userdata: [],
       series: [
         {
           name: "series-1",
           data: [100, 40, 45, 100, 49, 60, 70, 100]
+        },
+        {
+          name: "series-2",
+          data: [10, 20, 30, 100, 80, 70, 30, 10]
+        },
+        {
+          name: "series-3",
+          data: [50, 25, 35, 60, 50, 40, 20, 10]
         }
       ],
       xaxis: {
         categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-      }
+      },
+      activeSeriesLine: 0,
     };
     this.handleSeriesDataChange = this.handleSeriesDataChange.bind(this);
+    this.setActiveLine = this.setActiveLine.bind(this);
+  }
+
+  setActiveLine(activeLine) {
+    this.setState({ activeSeriesLine: activeLine });
+ //   console.log(activeLine);
   }
 
   componentDidMount() {
@@ -49,52 +63,57 @@ class ChartEditorLayoutWithFirebase extends React.Component {
         }));
       }
 
-      let seriename = this.state.series[0].name;
-      let seriedata = [...this.state.series[0].data];
-      let newseriedata = this.state.series[0].data.map((oldValue, index) => {
-        let xaxisItem = this.state.xaxis.categories[index];
-        console.log(xaxisItem);
-        console.log(seriename);
-        console.log(oldValue);
-        //console.log(seriename);
-        //console.log(seriedata);
-        //console.log(userdataList);
-        let userdataitem = userdataList.filter(
-          dataitem =>
-            dataitem.dimension1 === seriename &&
-            dataitem.dimension2 === xaxisItem
-        );
-        if (userdataitem.length > 0) {
-          let newValue = parseFloat(userdataitem[0].value);
-          console.log(newValue);
-          return newValue
-        }
-        return oldValue;
-      });
-
       let series = [...this.state.series];
-      series[0].data = newseriedata;
-      console.log(newseriedata);
+
+      this.state.series.map((line, lineIndex) => {
+        let seriename = line.name;
+        let newseriedata = this.state.series[lineIndex].data.map((oldValue, index) => {
+          let xaxisItem = this.state.xaxis.categories[index];
+          // console.log(xaxisItem);
+          // console.log(seriename);
+          // console.log(oldValue);
+          let userdataitem = userdataList.filter(
+            dataitem =>
+              dataitem.dimension1 === seriename &&
+              dataitem.dimension2 === xaxisItem
+          );
+          if (userdataitem.length > 0) {
+            let newValue = parseFloat(userdataitem[0].value);
+         //   console.log(newValue);
+            return newValue
+          }
+          return oldValue;
+        });
+
+        series[lineIndex].data = newseriedata;
+     //   console.log(newseriedata);
+      }
+      );
+
+
+
+
       this.setState({
-        userdata: newseriedata,
         series,
         isUpdating: false
       });
     });
   }
 
-  handleSeriesDataChange(datalineNumber, datalineArrayElement, elementValue) {
+  handleSeriesDataChange(datalineArrayElement, elementValue) {
     this.setState({
       isUpdating: true
     });
+    let activeSeriesLine = this.state.activeSeriesLine;
+
     let series = [...this.state.series];
-    let datalineDataArray = [...series[datalineNumber].data];
+    let datalineDataArray = [...series[activeSeriesLine].data];
     datalineDataArray[datalineArrayElement] = parseFloat(elementValue);
-    series[datalineNumber].data = datalineDataArray;
+    series[activeSeriesLine].data = datalineDataArray;
 
     let timestamp = Date.now();
     let category = this.state.xaxis.categories[datalineArrayElement];
-    let xaxe = this.state.series[datalineNumber].name;
+    let xaxe = this.state.series[activeSeriesLine].name;
     let firebasecode = xaxe + "___" + category;
 
     this.props.firebase
@@ -116,7 +135,7 @@ class ChartEditorLayoutWithFirebase extends React.Component {
       .child(this.props.useruid)
       .set({
         value: elementValue,
-        dimension1: this.state.series[datalineNumber].name,
+        dimension1: this.state.series[activeSeriesLine].name,
         dimension2: this.state.xaxis.categories[datalineArrayElement],
         source: "Basic Line",
         timestamp
@@ -140,29 +159,31 @@ class ChartEditorLayoutWithFirebase extends React.Component {
   }
 
   render() {
-    let { isUpdating, series } = this.state;
-    console.log(series);
+    let { isUpdating, series, activeSeriesLine } = this.state;
+    let seriesLine = series[activeSeriesLine];
+    let lines = series.map((item) => item.name);
 
-    if (isUpdating) return (<div className="flexCenterEverything" style={{ minWidth: "900px", maxHeight: "500px" }}>...</div>)
-
+   // console.log(series);
     return (
-      <div className="ChartEditorContainer">
-        <div style={{ minWidth: "900px", maxHeight: "500px" }}>
-          <ChartLayout
-            useruid={this.props.useruid}
-            series={this.state.series}
-            xaxis={this.state.xaxis}
-          />
+      <div className="flexRowOrColumn">
+        <div style={{ width: "900px", maxHeight: "500px" }}>
+          {isUpdating ? '...' :
+            <ChartLayout
+              useruid={this.props.useruid}
+              series={this.state.series}
+              xaxis={this.state.xaxis}
+            />
+          }
         </div>
-        <div>
+        <div style={{ marginRight: "2rem" }}>
           <span style={{ marginRight: "2rem" }}>{this.props.username}</span>
           <span>
             <SignOutButton onLogin={this.props.onLogin} />
           </span>
-          <hr />
+          <ChooseLineInSeries lines={lines} activeSeriesLine={activeSeriesLine} setActiveLine={this.setActiveLine} />
           <TableLayout
             useruid={this.props.useruid}
-            series={series}
+            seriesLine={seriesLine}
             xaxis={this.state.xaxis}
             typeofchart={this.props.typeofchart}
             handleSeriesDataChange={this.handleSeriesDataChange}
@@ -174,3 +195,16 @@ class ChartEditorLayoutWithFirebase extends React.Component {
 }
 
 export default ChartEditorLayout;
+
+function ChooseLineInSeries({ lines, activeSeriesLine, setActiveLine }) {
+ // console.log(activeSeriesLine);
+  return <div className="flexRowOrColumn">
+    {lines.map((item, index) =>
+      <p
+        key={item}
+        onClick={() => setActiveLine(index)}
+        className="hover-underline-animation">
+        {activeSeriesLine === index ? <b>{item}</b> : item}
+      </p>)}
+  </div>
+}

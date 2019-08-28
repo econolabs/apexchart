@@ -61,7 +61,7 @@ class MyForm extends Component {
 
     return (
       <div>
-        <form onSubmit={this.onSubmit} style={{ marginTop: "20px" }}>
+        <form onSubmit={this.onSubmit} style={{ marginTop: '1rem' }}>
           <div className="SignUpFormInput">
             <h3 className="SignUpFormInput">Или зарегистрируйтесь</h3>
 
